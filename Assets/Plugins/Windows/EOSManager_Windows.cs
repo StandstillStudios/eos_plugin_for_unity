@@ -45,42 +45,10 @@ using Epic.OnlineServices.Logging;
 using System.Runtime.InteropServices;
 using System.Text;
 
-#if (UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN || UNITY_WSA_10_0)
+#if UNITY_EDITOR_WIN
 namespace PlayEveryWare.EpicOnlineServices
 {
-    //-------------------------------------------------------------------------
-    public class EOSWindowsOptions : IEOSCreateOptions
-    {
-        public Epic.OnlineServices.Platform.WindowsOptions options;
-
-        IntPtr IEOSCreateOptions.Reserved { get => options.Reserved; set => options.Reserved = value; }
-        Utf8String IEOSCreateOptions.ProductId { get => options.ProductId; set => options.ProductId = value; }
-        Utf8String IEOSCreateOptions.SandboxId { get => options.SandboxId; set => options.SandboxId = value; }
-        ClientCredentials IEOSCreateOptions.ClientCredentials { get => options.ClientCredentials; set => options.ClientCredentials = value; }
-        bool IEOSCreateOptions.IsServer { get => options.IsServer; set => options.IsServer = value; }
-        Utf8String IEOSCreateOptions.EncryptionKey { get => options.EncryptionKey; set => options.EncryptionKey = value; }
-        Utf8String IEOSCreateOptions.OverrideCountryCode { get => options.OverrideCountryCode; set => options.OverrideCountryCode = value; }
-        Utf8String IEOSCreateOptions.OverrideLocaleCode { get => options.OverrideLocaleCode; set => options.OverrideLocaleCode = value; }
-        Utf8String IEOSCreateOptions.DeploymentId { get => options.DeploymentId; set => options.DeploymentId = value; }
-        PlatformFlags IEOSCreateOptions.Flags { get => options.Flags; set => options.Flags = value; }
-        Utf8String IEOSCreateOptions.CacheDirectory { get => options.CacheDirectory; set => options.CacheDirectory = value; }
-        uint IEOSCreateOptions.TickBudgetInMilliseconds { get => options.TickBudgetInMilliseconds; set => options.TickBudgetInMilliseconds = value; }
-    }
-
-    //-------------------------------------------------------------------------
-    public class EOSWindowsInitializeOptions : IEOSInitializeOptions
-    {
-        public Epic.OnlineServices.Platform.InitializeOptions options;
-
-        public IntPtr AllocateMemoryFunction { get => options.AllocateMemoryFunction; set => options.AllocateMemoryFunction = value; }
-        public IntPtr ReallocateMemoryFunction { get => options.ReallocateMemoryFunction; set => options.ReallocateMemoryFunction = value; }
-        public IntPtr ReleaseMemoryFunction { get => options.ReleaseMemoryFunction; set => options.ReleaseMemoryFunction = value; }
-        public Utf8String ProductName { get => options.ProductName; set => options.ProductName = value; }
-        public Utf8String ProductVersion { get => options.ProductVersion; set => options.ProductVersion = value; }
-        public InitializeThreadAffinity? OverrideThreadAffinity { get => options.OverrideThreadAffinity; set => options.OverrideThreadAffinity = value; }
-    }
-
-    //-------------------------------------------------------------------------
+     //-------------------------------------------------------------------------
     [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 8)]
     struct EOSSteamInternal : IDisposable
     {
@@ -119,6 +87,43 @@ namespace PlayEveryWare.EpicOnlineServices
                 Marshal.FreeHGlobal(m_OverrideLibraryPath);
             }
         }
+    }
+}
+#endif
+
+#if (UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN || UNITY_WSA_10_0)
+namespace PlayEveryWare.EpicOnlineServices
+{
+    //-------------------------------------------------------------------------
+    public class EOSWindowsOptions : IEOSCreateOptions
+    {
+        public Epic.OnlineServices.Platform.WindowsOptions options;
+
+        IntPtr IEOSCreateOptions.Reserved { get => options.Reserved; set => options.Reserved = value; }
+        Utf8String IEOSCreateOptions.ProductId { get => options.ProductId; set => options.ProductId = value; }
+        Utf8String IEOSCreateOptions.SandboxId { get => options.SandboxId; set => options.SandboxId = value; }
+        ClientCredentials IEOSCreateOptions.ClientCredentials { get => options.ClientCredentials; set => options.ClientCredentials = value; }
+        bool IEOSCreateOptions.IsServer { get => options.IsServer; set => options.IsServer = value; }
+        Utf8String IEOSCreateOptions.EncryptionKey { get => options.EncryptionKey; set => options.EncryptionKey = value; }
+        Utf8String IEOSCreateOptions.OverrideCountryCode { get => options.OverrideCountryCode; set => options.OverrideCountryCode = value; }
+        Utf8String IEOSCreateOptions.OverrideLocaleCode { get => options.OverrideLocaleCode; set => options.OverrideLocaleCode = value; }
+        Utf8String IEOSCreateOptions.DeploymentId { get => options.DeploymentId; set => options.DeploymentId = value; }
+        PlatformFlags IEOSCreateOptions.Flags { get => options.Flags; set => options.Flags = value; }
+        Utf8String IEOSCreateOptions.CacheDirectory { get => options.CacheDirectory; set => options.CacheDirectory = value; }
+        uint IEOSCreateOptions.TickBudgetInMilliseconds { get => options.TickBudgetInMilliseconds; set => options.TickBudgetInMilliseconds = value; }
+    }
+
+    //-------------------------------------------------------------------------
+    public class EOSWindowsInitializeOptions : IEOSInitializeOptions
+    {
+        public Epic.OnlineServices.Platform.InitializeOptions options;
+
+        public IntPtr AllocateMemoryFunction { get => options.AllocateMemoryFunction; set => options.AllocateMemoryFunction = value; }
+        public IntPtr ReallocateMemoryFunction { get => options.ReallocateMemoryFunction; set => options.ReallocateMemoryFunction = value; }
+        public IntPtr ReleaseMemoryFunction { get => options.ReleaseMemoryFunction; set => options.ReleaseMemoryFunction = value; }
+        public Utf8String ProductName { get => options.ProductName; set => options.ProductName = value; }
+        public Utf8String ProductVersion { get => options.ProductVersion; set => options.ProductVersion = value; }
+        public InitializeThreadAffinity? OverrideThreadAffinity { get => options.OverrideThreadAffinity; set => options.OverrideThreadAffinity = value; }
     }
 
     //-------------------------------------------------------------------------
